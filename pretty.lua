@@ -131,20 +131,4 @@ persistence = {
 			end;
 	}
 }
-
-
-function run(src,target)
-	print(src)
-	print(target)
-	loadfile(src)
-
-	if base_object then
-		persistence.store(target,base_object)
-		print(base_object)
-	elseif scenario then
-		persistence.store(target,scenario)
-	elseif race then
-		persistence.store(target,race)
-	else
-	end
-end
+run()

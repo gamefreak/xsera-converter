@@ -11,7 +11,11 @@ sed -e 's|,[^,]*$||' <"$f"3 >"$f"4
 #sed -e 's|, |,\
 #|g' <"$f"4 >"$f"5
 cp "${f}4" "./${f/xml/lua}"
-lua "./${f/xml/lua}" 2>>err && echo "$n OK" && mv "${f/xml/lua}" "./new/${1/xml/lua}"
+lua "./${f/xml/lua}" 2>>err && echo "$n OK"
+#lua ./pretty.lua -e "run('./${f/xml/lua}','./new/${1/xml/lua}')"
+#< "./${f/xml/lua}"
+mv "${f/xml/lua}" "./new/${1/xml/lua}"
 rm "$f"
 rm "$f"[12345]
+rm "${f/xml/lua}"
 

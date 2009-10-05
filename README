@@ -1,4 +1,5 @@
 To use the conversion script on everything:
-
+Copy the contents of ares-data/derived/ to xsera-convert/
+Then run the following in the terminal;
 cd /path/to/xsera-converter/
 ./run_conversions.sh

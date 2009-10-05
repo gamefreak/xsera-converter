@@ -17,5 +17,5 @@ lua "./${f/xml/lua}" 2>>err && echo "$n OK"
 mv "${f/xml/lua}" "./new/${1/xml/lua}"
 rm "$f"
 rm "$f"[12345]
-rm "${f/xml/lua}"
+#rm "${f/xml/lua}"
 

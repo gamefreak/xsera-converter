@@ -1,4 +1,4 @@
 To use the conversion script on everything:
 
 cd /path/to/xsera-converter/
-./run_conversion.sh
+./run_conversions.sh

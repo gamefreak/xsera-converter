@@ -16,7 +16,7 @@ lua "./${f/xml/lua}" 2>>err && echo "$n OK"
 
 if [ "$pretty" == "true" ]
 then
-	lua -e "dofile('${f/xml/lua}'); function run() persistence.store('./new/${1/xml/lua}',"`sed -e "s|^\([a-z0-9_\-]*\).*|\1|" <"${f/xml/lua}"`") end" ./pretty.lua
+	lua -e "dofile('${f/xml/lua}'); function run() reconfig(`sed -e \"s|^\([a-z0-9_\-]*\).*|\1|\" <\"${f/xml/lua}\"`);persistence.store('./new/${1/xml/lua}',"`sed -e "s|^\([a-z0-9_\-]*\).*|\1|" <"${f/xml/lua}"`") end" ./pretty.lua
 	rm "${f/xml/lua}"
 else
 	mv "${f/xml/lua}" "./new/${1/xml/lua}"

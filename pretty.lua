@@ -131,4 +131,27 @@ persistence = {
 			end;
 	}
 }
+
+function reconfig(object)
+	local weapon = {}
+	if object.weapon1 ~= nil then
+		weapon[1] = object.weapon1
+	end
+	
+	if object.weapon2 ~= nil then
+		weapon[2] = object.weapon1
+	end
+	
+	if object.weapon3 ~= nil then
+		weapon[3] = object.weapon1
+	end
+	
+	if #weapon>0 then
+		object.weapon = weapon
+		object.weapon1 = nil
+		object.weapon2 = nil
+		object.weapon3 = nil
+	end
+--	return 
+end
 run()

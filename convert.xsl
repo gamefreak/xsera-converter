@@ -61,8 +61,53 @@
 <xsl:when test="@real"><xsl:value-of select="@real"/></xsl:when>
 <xsl:when test="@integer"><xsl:value-of select="@integer"/></xsl:when>
 <xsl:when test="@string">"<xsl:value-of select="@string"/>"</xsl:when>
+<xsl:when test="@bool">"<xsl:value-of select="@bool"/>"</xsl:when>
 </xsl:choose>;
 </xsl:template>
+
+<xsl:template name="action">return {
+["type"] = <xsl:value-of select="name(.)"/>;
+<xsl:for-each select="*"><xsl:call-template name="plain"/></xsl:for-each>
+};
+</xsl:template>
+
+<xsl:template match="activate-special-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="alter-absolute-cash-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="alter-absolute-location-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="alter-age-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="alter-base-type-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="alter-cloak-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="alter-condition-true-yet-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="alter-damage-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="alter-energy-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="alter-hidden-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="alter-location-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="alter-max-velocity-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="alter-occupation-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="alter-offline-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="alter-owner-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="alter-special-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="alter-spin-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="alter-thrust-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="alter-velocity-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="assume-initial-object-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="change-score-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="color-flash-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="computer-select-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="create-object-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="create-object-set-dest-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="declare-winner-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="die-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="disable-keys-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="display-message-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="enable-keys-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="land-at-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="make-sparks-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="nil-target-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="no-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="play-sound-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="set-destination-action"><xsl:call-template name="action"/></xsl:template>
+<xsl:template match="set-zoom-action"><xsl:call-template name="action"/></xsl:template>
 
 <xsl:template match="other"></xsl:template>
 

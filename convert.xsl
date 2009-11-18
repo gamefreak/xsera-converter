@@ -9,6 +9,7 @@
 		<xsl:when test="name(.) = 'action'"><!--PASS--></xsl:when>
 		<xsl:when test="name(.) = 'device'"><xsl:call-template name="device"/></xsl:when>
 		<xsl:when test="name(.) = 'rotation'"><xsl:call-template name="rotation"/></xsl:when>
+		<xsl:when test="name(.) = 'beam'"><xsl:call-template name="beam"/></xsl:when>
 		<xsl:otherwise><xsl:call-template name="plain"/></xsl:otherwise>
 	</xsl:choose>
 </xsl:for-each>
@@ -41,29 +42,39 @@
 	};
 	</xsl:if>
 }</xsl:template>
+
 <xsl:template name="flags">
 ["<xsl:value-of select="name(.)"/>"] = {
 <xsl:for-each select="*">["<xsl:value-of select="name(.)"/>"] = true;</xsl:for-each>
 };
 </xsl:template>
+
 <xsl:template name="device">
 ["device"] = {<xsl:for-each select="*">
 <xsl:call-template name="plain"/>
 </xsl:for-each>
 };</xsl:template>
+
 <xsl:template name="rotation">
-["rotation"] = {<xsl:for-each select="*">
+["rotation"] = {
+<xsl:for-each select="*"><xsl:call-template name="plain"/></xsl:for-each>
+};
+</xsl:template>
+
+<xsl:template name="beam">["beam"] = {
+<xsl:for-each select="*">
 <xsl:call-template name="plain"/>
 </xsl:for-each>};
 </xsl:template>
-<xsl:template name="plain">
-["<xsl:value-of select="name(.)"/>"] = <xsl:choose>
-<xsl:when test="@real"><xsl:value-of select="@real"/></xsl:when>
-<xsl:when test="@integer"><xsl:value-of select="@integer"/></xsl:when>
-<xsl:when test="@string">"<xsl:value-of select="@string"/>"</xsl:when>
+
+<xsl:template name="plain">["<xsl:value-of select="name(.)"/>"] = <xsl:choose>
+	<xsl:when test="@real"><xsl:value-of select="@real"/></xsl:when>
+	<xsl:when test="@integer"><xsl:value-of select="@integer"/></xsl:when>
+	<xsl:when test="@string">"<xsl:value-of select="@string"/>"</xsl:when>
 </xsl:choose>;
 </xsl:template>
-<xsl:template match="other">
-</xsl:template>
+
+<xsl:template match="other"></xsl:template>
+
 </xsl:transform>
 

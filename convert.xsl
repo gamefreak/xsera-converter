@@ -7,6 +7,7 @@
 		<xsl:when test="name(.) = 'attributes' or name(.) = 'build-flags' or name(.) = 'order-flags'"><xsl:call-template name="flags"/></xsl:when>
 		<xsl:when test="name(.) = 'weapon'"><!--PASS--></xsl:when>
 		<xsl:when test="name(.) = 'action'"><!--PASS--></xsl:when>
+		<xsl:when test="name(.) = 'device'"><xsl:call-template name="device"/></xsl:when>
 		<xsl:when test="name(.) = 'rotation'"><xsl:call-template name="rotation"/></xsl:when>
 		<xsl:otherwise><xsl:call-template name="plain"/></xsl:otherwise>
 	</xsl:choose>
@@ -45,6 +46,11 @@
 <xsl:for-each select="*">["<xsl:value-of select="name(.)"/>"] = true;</xsl:for-each>
 };
 </xsl:template>
+<xsl:template name="device">
+["device"] = {<xsl:for-each select="*">
+<xsl:call-template name="plain"/>
+</xsl:for-each>
+};</xsl:template>
 <xsl:template name="rotation">
 ["rotation"] = {<xsl:for-each select="*">
 <xsl:call-template name="plain"/>

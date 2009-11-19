@@ -71,6 +71,38 @@
 };
 </xsl:template>
 
+<xsl:template match="initial-object">return {
+<xsl:for-each select="*">
+<xsl:choose>
+<xsl:when test="location">["location"] = {
+	["x"]=<xsl:value-of select="@x"/>;
+	["y"]=<xsl:value-of select="@y"/>;
+};</xsl:when>
+<xsl:otherwise><xsl:call-template name="plain"/></xsl:otherwise>
+</xsl:choose>
+</xsl:for-each>
+};
+</xsl:template>
+
+<!--
+I wish chris had exported the actions as something like:
+<action>
+	<type type="some-type-action"/>
+	...
+</action>
+OR
+<action>
+	<type>some-type-action</type>
+	...
+</action>
+OR
+<action type="some-type-action">
+	...
+</action>
+
+If he had this part would be MUCH saner.
+27 templates each calling the same template.
+-->
 <xsl:template match="activate-special-action"><xsl:call-template name="action"/></xsl:template>
 <xsl:template match="alter-absolute-cash-action"><xsl:call-template name="action"/></xsl:template>
 <xsl:template match="alter-absolute-location-action"><xsl:call-template name="action"/></xsl:template>
@@ -109,7 +141,6 @@
 <xsl:template match="set-destination-action"><xsl:call-template name="action"/></xsl:template>
 <xsl:template match="set-zoom-action"><xsl:call-template name="action"/></xsl:template>
 
-<xsl:template match="other"></xsl:template>
 
 </xsl:transform>
 

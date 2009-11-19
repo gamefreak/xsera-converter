@@ -84,6 +84,11 @@
 };
 </xsl:template>
 
+<xsl:template match="race">
+return {
+<xsl:for-each select="*"><xsl:call-template name="plain"/></xsl:for-each>
+};
+</xsl:template>
 <!--
 I wish chris had exported the actions as something like:
 <action>

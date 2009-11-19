@@ -49,7 +49,8 @@ indent="yes"
 </xsl:for-each>
 };
 </xsl:if>
-}</xsl:template>
+};
+</xsl:template>
 
 <xsl:template name="flags">["<xsl:value-of select="name(.)"/>"] = {
 <xsl:for-each select="*">	["<xsl:value-of select="name(.)"/>"] = true;
@@ -70,7 +71,7 @@ indent="yes"
 </xsl:template>
 
 <xsl:template name="action">return {
-["type"] = <xsl:value-of select="name(.)"/>;
+["type"] = "<xsl:value-of select="name(.)"/>";
 <xsl:for-each select="*"><xsl:call-template name="plain"/></xsl:for-each>
 };
 </xsl:template>

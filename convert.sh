@@ -7,11 +7,13 @@ else
 	prefix="."
 fi
 
-#if [ -n "$2" ]
-#then
-#        fname=$2
-#else
-#	fname="*.xml"
-#fi
+if [ -n "$2" ]
+then
+t=$2
+else
+t=/dev/null
+fi
 
-find $prefix -name $fname -type f -print0 | xargs -n 1 -0 xsltproc ./convert.xsl
+find $prefix -name *.xml -type f -print0 | xargs -n 1 -0 ./sub.sh $t
+
+#find $prefix -name $fname -type f -print0 | xargs -n 1 -0 xsltproc ./convert.xsl | lua

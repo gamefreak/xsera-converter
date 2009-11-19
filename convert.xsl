@@ -99,23 +99,23 @@ return {
 return {
 <xsl:for-each select="*">
 <xsl:choose>
-<xsl:when test="player"><!--PASS--></xsl:when>
-<xsl:when test="score-string">
+<xsl:when test="name(.) = 'player'"><!--PASS--></xsl:when>
+<xsl:when test="name(.) = 'score-string'">
 ["score-string"] = {
 <xsl:for-each select="line">
 ["<xsl:number/>"] = "<xsl:value-of select="@string"/>";
 </xsl:for-each>
 };
 </xsl:when>
-<xsl:when test="star-map-location">
+<xsl:when test="name(.) = 'star-map-location'">
 ["star-map-location"] = {
 ["x"] = <xsl:value-of select="@x"/>;
 ["y"] = <xsl:value-of select="@y"/>;
 };
 </xsl:when>
-<xsl:when test="initial"><xsl:call-template name="id-count"/></xsl:when>
-<xsl:when test="condition"><xsl:call-template name="id-count"/></xsl:when>
-<xsl:when test="brief-point"><xsl:call-template name="id-count"/></xsl:when>
+<xsl:when test="name(.) = 'initial'"><xsl:call-template name="id-count"/></xsl:when>
+<xsl:when test="name(.) = 'condition'"><xsl:call-template name="id-count"/></xsl:when>
+<xsl:when test="name(.) = 'brief-point'"><xsl:call-template name="id-count"/></xsl:when>
 <xsl:otherwise><xsl:call-template name="plain"/></xsl:otherwise>
 </xsl:choose>
 </xsl:for-each>
@@ -124,7 +124,7 @@ return {
 ["<xsl:number/>"] = {
 <xsl:for-each select="*">
 <xsl:choose>
-<xsl:when test="net-races">
+<xsl:when test="name(.) = 'net-races'">
 <xsl:for-each select="*">
 ["<xsl:number/>"] = <xsl:value-of select="@integer"/>;
 </xsl:for-each>

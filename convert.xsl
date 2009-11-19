@@ -1,50 +1,54 @@
 <xsl:transform 
-   version="1.0" 
-   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
-   xmlns:fn="http://www.w3.org/2005/xpath-functions"
-><xsl:template match="base-object">return {
+version="1.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+xmlns:fn="http://www.w3.org/2005/xpath-functions"
+><xsl:output
+omit-xml-declaration="yes"
+encoding="UTF-8"
+indent="yes"
+/><xsl:template match="base-object">return {
 <xsl:for-each select="*"><xsl:choose>
-		<xsl:when test="name(.) = 'attributes'"><xsl:call-template name="flags"/></xsl:when>
-		<xsl:when test="name(.) = 'build-flags'"><xsl:call-template name="flags"/></xsl:when>
-		<xsl:when test="name(.) = 'order-flags'"><xsl:call-template name="flags"/></xsl:when>
-		<xsl:when test="name(.) = 'weapon'"><!--PASS--></xsl:when>
-		<xsl:when test="name(.) = 'action'"><!--PASS--></xsl:when>
-		<xsl:when test="name(.) = 'device'"><xsl:call-template name="basic-tree"/></xsl:when>
-		<xsl:when test="name(.) = 'rotation'"><xsl:call-template name="basic-tree"/></xsl:when>
-		<xsl:when test="name(.) = 'animation'"><xsl:call-template name="basic-tree"/></xsl:when>
-		<xsl:when test="name(.) = 'beam'"><xsl:call-template name="basic-tree"/></xsl:when>
-		<xsl:otherwise><xsl:call-template name="plain"/></xsl:otherwise>
-	</xsl:choose>
+<xsl:when test="name(.) = 'attributes'"><xsl:call-template name="flags"/></xsl:when>
+<xsl:when test="name(.) = 'build-flags'"><xsl:call-template name="flags"/></xsl:when>
+<xsl:when test="name(.) = 'order-flags'"><xsl:call-template name="flags"/></xsl:when>
+<xsl:when test="name(.) = 'weapon'"><!--PASS--></xsl:when>
+<xsl:when test="name(.) = 'action'"><!--PASS--></xsl:when>
+<xsl:when test="name(.) = 'device'"><xsl:call-template name="basic-tree"/></xsl:when>
+<xsl:when test="name(.) = 'rotation'"><xsl:call-template name="basic-tree"/></xsl:when>
+<xsl:when test="name(.) = 'animation'"><xsl:call-template name="basic-tree"/></xsl:when>
+<xsl:when test="name(.) = 'beam'"><xsl:call-template name="basic-tree"/></xsl:when>
+<xsl:otherwise><xsl:call-template name="plain"/></xsl:otherwise>
+</xsl:choose>
 </xsl:for-each>
 <xsl:if test="action">
-		["action"] = {
-		<xsl:for-each select="action">
-			[<xsl:number/>] = {
-				["id"] = <xsl:value-of select="@id"/>;
-				["count"] = <xsl:value-of select="@count"/>;
-				["trigger"] = <xsl:value-of select="@trigger"/>;
-			};
-		</xsl:for-each>
-		};
-	</xsl:if>
-	
-	<xsl:if test="weapon">
-		["weapon"] = {
-		<xsl:for-each select="weapon">
-		[<xsl:number/>] = {
-			["id"] = <xsl:value-of select="@id"/>;
-			["type"] = <xsl:value-of select="@type"/>;
-			["position"] = {
-				<xsl:for-each select="position">[<xsl:number/>] = {
-					["x"] = <xsl:value-of select="@x"/>;
-					["y"] = <xsl:value-of select="@y"/>;
-					};
-				</xsl:for-each>
-			};
-		};
-		</xsl:for-each>
-	};
-	</xsl:if>
+["action"] = {
+<xsl:for-each select="action">
+[<xsl:number/>] = {
+["id"] = <xsl:value-of select="@id"/>;
+["count"] = <xsl:value-of select="@count"/>;
+["trigger"] = <xsl:value-of select="@trigger"/>;
+};
+</xsl:for-each>
+};
+</xsl:if>
+
+<xsl:if test="weapon">
+["weapon"] = {
+<xsl:for-each select="weapon">
+[<xsl:number/>] = {
+["id"] = <xsl:value-of select="@id"/>;
+["type"] = <xsl:value-of select="@type"/>;
+["position"] = {
+<xsl:for-each select="position">[<xsl:number/>] = {
+["x"] = <xsl:value-of select="@x"/>;
+["y"] = <xsl:value-of select="@y"/>;
+};
+</xsl:for-each>
+};
+};
+</xsl:for-each>
+};
+</xsl:if>
 }</xsl:template>
 
 <xsl:template name="flags">["<xsl:value-of select="name(.)"/>"] = {
@@ -74,9 +78,9 @@
 <xsl:template match="initial-object">return {
 <xsl:for-each select="*">
 <xsl:choose>
-<xsl:when test="location">["location"] = {
-	["x"]=<xsl:value-of select="@x"/>;
-	["y"]=<xsl:value-of select="@y"/>;
+<xsl:when test="name(.) = 'location'">["location"] = {
+["x"]=<xsl:value-of select="@x"/>;
+["y"]=<xsl:value-of select="@y"/>;
 };</xsl:when>
 <xsl:otherwise><xsl:call-template name="plain"/></xsl:otherwise>
 </xsl:choose>
@@ -104,8 +108,8 @@ return {
 </xsl:when>
 <xsl:when test="star-map-location">
 ["star-map-location"] = {
-["x"] = <xsl:value-of="@x"/>;
-["y"] = <xsl:value-of="@y"/>;
+["x"] = <xsl:value-of select="@x"/>;
+["y"] = <xsl:value-of select="@y"/>;
 };
 </xsl:when>
 <xsl:when test="initial"><xsl:call-template name="id-count"/></xsl:when>
@@ -123,7 +127,7 @@ return {
 <xsl:for-each select="*">
 ["<xsl:number/>"] = <xsl:value-of select="@integer"/>;
 </xsl:for-each>
-</xsl:test>
+</xsl:when>
 <xsl:otherwise><xsl:call-template name="plain"/></xsl:otherwise>
 </xsl:choose>
 </xsl:for-each>

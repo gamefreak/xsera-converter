@@ -89,6 +89,57 @@ return {
 <xsl:for-each select="*"><xsl:call-template name="plain"/></xsl:for-each>
 };
 </xsl:template>
+
+<xsl:template match="scenario">
+return {
+<xsl:for-each select="*">
+<xsl:choose>
+<xsl:when test="player"><!--PASS--></xsl:when>
+<xsl:when test="score-string">
+["score-string"] = {
+<xsl:for-each select="line">
+["<xsl:number/>"] = "<xsl:value-of select="@string"/>";
+</xsl:for-each>
+};
+</xsl:when>
+<xsl:when test="star-map-location">
+["star-map-location"] = {
+["x"] = <xsl:value-of="@x"/>;
+["y"] = <xsl:value-of="@y"/>;
+};
+</xsl:when>
+<xsl:when test="initial"><xsl:call-template name="id-count"/></xsl:when>
+<xsl:when test="condition"><xsl:call-template name="id-count"/></xsl:when>
+<xsl:when test="brief-point"><xsl:call-template name="id-count"/></xsl:when>
+<xsl:otherwise><xsl:call-template name="plain"/></xsl:otherwise>
+</xsl:choose>
+</xsl:for-each>
+["player"] = {
+<xsl:for-each select="player">
+["<xsl:number/>"] = {
+<xsl:for-each select="*">
+<xsl:choose>
+<xsl:when test="net-races">
+<xsl:for-each select="*">
+["<xsl:number/>"] = <xsl:value-of select="@integer"/>;
+</xsl:for-each>
+</xsl:test>
+<xsl:otherwise><xsl:call-template name="plain"/></xsl:otherwise>
+</xsl:choose>
+</xsl:for-each>
+};
+</xsl:for-each>
+};
+};
+</xsl:template>
+
+
+<xsl:template name="id-count">
+["<xsl:value-of select="name(.)"/>"] = {
+["id"] = <xsl:value-of select="@id"/>;
+["count"] = <xsl:value-of select="@count"/>;
+};
+</xsl:template>
 <!--
 I wish chris had exported the actions as something like:
 <action>

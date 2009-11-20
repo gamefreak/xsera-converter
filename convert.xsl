@@ -103,7 +103,9 @@ return {
 <xsl:when test="name(.) = 'score-string'">
 ["score-string"] = {
 <xsl:for-each select="line">
-["<xsl:number/>"] = "<xsl:value-of select="@string"/>";
+["<xsl:number/>"] = [==[
+<xsl:value-of select="@string"/>";
+]==];
 </xsl:for-each>
 };
 </xsl:when>

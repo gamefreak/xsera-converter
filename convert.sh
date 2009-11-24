@@ -16,4 +16,3 @@ fi
 
 find $prefix -name *.xml -type f -print0 | xargs -n 1 -0 ./sub.sh $t
 
-#find $prefix -name $fname -type f -print0 | xargs -n 1 -0 xsltproc ./convert.xsl | lua

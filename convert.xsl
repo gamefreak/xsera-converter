@@ -6,7 +6,7 @@ xmlns:fn="http://www.w3.org/2005/xpath-functions"
 omit-xml-declaration="yes"
 encoding="UTF-8"
 indent="yes"
-/><xsl:template match="base-object">return {
+/><xsl:template match="base-object"> {
 <xsl:for-each select="*"><xsl:choose>
 <xsl:when test="name(.) = 'attributes'"><xsl:call-template name="flags"/></xsl:when>
 <xsl:when test="name(.) = 'build-flags'"><xsl:call-template name="flags"/></xsl:when>
@@ -70,13 +70,13 @@ indent="yes"
 </xsl:choose>;
 </xsl:template>
 
-<xsl:template name="action">return {
+<xsl:template name="action"> {
 ["type"] = "<xsl:value-of select="name(.)"/>";
 <xsl:for-each select="*"><xsl:call-template name="plain"/></xsl:for-each>
 };
 </xsl:template>
 
-<xsl:template match="initial-object">return {
+<xsl:template match="initial-object"> {
 <xsl:for-each select="*">
 <xsl:choose>
 <xsl:when test="name(.) = 'location'">["location"] = {
@@ -90,13 +90,13 @@ indent="yes"
 </xsl:template>
 
 <xsl:template match="race">
-return {
+ {
 <xsl:for-each select="*"><xsl:call-template name="plain"/></xsl:for-each>
 };
 </xsl:template>
 
 <xsl:template match="scenario">
-return {
+{
 <xsl:for-each select="*">
 <xsl:choose>
 <xsl:when test="name(.) = 'player'"><!--PASS--></xsl:when>

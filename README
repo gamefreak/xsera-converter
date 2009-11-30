@@ -1,0 +1,3 @@
+Just Run
+
+./run.sh <derived data dir> <target directory>

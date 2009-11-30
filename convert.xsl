@@ -103,7 +103,7 @@ indent="yes"
 <xsl:when test="name(.) = 'score-string'">
 ["score-string"] = {
 <xsl:for-each select="line">
-["<xsl:number/>"] = [==[
+[<xsl:number/>] = [==[
 <xsl:value-of select="@string"/>";
 ]==];
 </xsl:for-each>
@@ -123,12 +123,12 @@ indent="yes"
 </xsl:for-each>
 ["player"] = {
 <xsl:for-each select="player">
-["<xsl:number/>"] = {
+[<xsl:number/>] = {
 <xsl:for-each select="*">
 <xsl:choose>
 <xsl:when test="name(.) = 'net-races'">
 <xsl:for-each select="*">
-["<xsl:number/>"] = <xsl:value-of select="@integer"/>;
+[<xsl:number/>] = <xsl:value-of select="@integer"/>;
 </xsl:for-each>
 </xsl:when>
 <xsl:otherwise><xsl:call-template name="plain"/></xsl:otherwise>

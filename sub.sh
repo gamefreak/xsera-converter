@@ -1,8 +1,6 @@
 #! /bin/bash
-#echo $1 $2
-i=$1/$2
 filename=${2##*/}
-#echo "$filename"
+echo "$filename"
 newfile="${filename%xml}""lua"
 #echo "$1/""$newfile"
 num=`echo "$newfile" | sed -e "s/[ \.].*//"`

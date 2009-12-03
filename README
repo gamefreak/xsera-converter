@@ -1,3 +1,7 @@
+Requirements:
+xsltproc
+imagemagick montage
+
 Just Run
 
 ./run.sh <derived data dir> <target directory>

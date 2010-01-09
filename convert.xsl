@@ -37,7 +37,7 @@ indent="yes"
 <xsl:for-each select="weapon">
 [<xsl:number/>] = {
 ["id"] = <xsl:value-of select="@id"/>;
-["type"] = <xsl:value-of select="@type"/>;
+["type"] = "<xsl:value-of select="@type"/>";
 ["position"] = {
 <xsl:for-each select="position">[<xsl:number/>] = {
 ["x"] = <xsl:value-of select="@x"/>;

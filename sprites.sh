@@ -23,7 +23,7 @@ case "$n" in
 	29) dim=29x1;;
 	36) dim=6x6;;
 esac
-montage "$2/*.png" -tile 6x7 -geometry +0+0 -background transparent "$1"/Sprites/$number.png
+montage "$2/*.png" -tile $dim -geometry +0+0 -background transparent "$1"/Sprites/$number.png
 echo "[$number] = \"$name\";" >> $1/Sprites.lua
 
 cat > $1/Sprites/$number.xml <<EOF

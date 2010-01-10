@@ -3,6 +3,7 @@ version="1.0"
 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
 xmlns:fn="http://www.w3.org/2005/xpath-functions"
 ><xsl:output
+method="text"
 omit-xml-declaration="yes"
 encoding="UTF-8"
 indent="yes"
@@ -26,7 +27,7 @@ indent="yes"
 [<xsl:number/>] = {
 ["id"] = <xsl:value-of select="@id"/>;
 ["count"] = <xsl:value-of select="@count"/>;
-["trigger"] = <xsl:value-of select="@trigger"/>;
+["trigger"] = "<xsl:value-of select="@trigger"/>";
 };
 </xsl:for-each>
 };
@@ -96,7 +97,7 @@ indent="yes"
 </xsl:template>
 
 <xsl:template match="scenario">
-{
+{	
 <xsl:for-each select="*">
 <xsl:choose>
 <xsl:when test="name(.) = 'player'"><!--PASS--></xsl:when>

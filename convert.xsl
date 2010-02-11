@@ -77,6 +77,32 @@ indent="yes"
 };
 </xsl:template>
 
+
+
+
+
+<xsl:template name="condition"> {
+["type"] = "<xsl:value-of select="name(.)"/>";
+<xsl:for-each select="*">
+<xsl:choose>
+<xsl:when test="name(.) = 'condition-flags'"><xsl:call-template name="flags"/></xsl:when>
+<xsl:when test="name(.) = 'action'">["action"] = <xsl:call-template name="trigger"/></xsl:when>
+<xsl:otherwise><xsl:call-template name="plain"/></xsl:otherwise></xsl:choose></xsl:for-each>
+};
+</xsl:template>
+
+
+<xsl:template name="trigger"> {
+["id"] = <xsl:value-of select="@id"/>;
+["count"] = <xsl:value-of select="@count"/>;
+["trigger"] = "<xsl:value-of select="@trigger"/>";
+};
+</xsl:template>
+
+
+
+
+
 <xsl:template match="initial-object"> {
 <xsl:for-each select="*">
 <xsl:choose>
@@ -148,6 +174,8 @@ indent="yes"
 ["count"] = <xsl:value-of select="@count"/>;
 };
 </xsl:template>
+
+
 <!--
 I wish chris had exported the actions as something like:
 <action>
@@ -204,7 +232,28 @@ If he had this part would be MUCH saner.
 <xsl:template match="play-sound-action"><xsl:call-template name="action"/></xsl:template>
 <xsl:template match="set-destination-action"><xsl:call-template name="action"/></xsl:template>
 <xsl:template match="set-zoom-action"><xsl:call-template name="action"/></xsl:template>
-
+<!--AND THE SAME FOR THE CONDITIONS--><!--RANT RANT-->
+<xsl:template match="autopilot-condition"><xsl:call-template name="condition"/></xsl:template>
+<xsl:template match="counter-condition"><xsl:call-template name="condition"/></xsl:template>
+<xsl:template match="counter-greater-condition"><xsl:call-template name="condition"/></xsl:template>
+<xsl:template match="current-computer-condition"><xsl:call-template name="condition"/></xsl:template>
+<xsl:template match="current-message-condition"><xsl:call-template name="condition"/></xsl:template>
+<xsl:template match="destruction-condition"><xsl:call-template name="condition"/></xsl:template>
+<xsl:template match="direct-is-subject-target-condition"><xsl:call-template name="condition"/></xsl:template>
+<xsl:template match="distance-greater-condition"><xsl:call-template name="condition"/></xsl:template>
+<xsl:template match="half-health-condition"><xsl:call-template name="condition"/></xsl:template>
+<xsl:template match="is-auxiliary-object-condition"><xsl:call-template name="condition"/></xsl:template>
+<xsl:template match="is-target-object-condition"><xsl:call-template name="condition"/></xsl:template>
+<xsl:template match="no-condition"><xsl:call-template name="condition"/></xsl:template>
+<xsl:template match="no-ships-left-condition"><xsl:call-template name="condition"/></xsl:template>
+<xsl:template match="not-autopilot-condition"><xsl:call-template name="condition"/></xsl:template>
+<xsl:template match="object-is-being-built-condition"><xsl:call-template name="condition"/></xsl:template>
+<xsl:template match="owner-condition"><xsl:call-template name="condition"/></xsl:template>
+<xsl:template match="proximity-condition"><xsl:call-template name="condition"/></xsl:template>
+<xsl:template match="subject-is-player-condition"><xsl:call-template name="condition"/></xsl:template>
+<xsl:template match="time-condition"><xsl:call-template name="condition"/></xsl:template>
+<xsl:template match="velocity-less-than-equal-to-condition"><xsl:call-template name="condition"/></xsl:template>
+<xsl:template match="zoom-level-condition"><xsl:call-template name="condition"/></xsl:template>
 
 </xsl:transform>
 

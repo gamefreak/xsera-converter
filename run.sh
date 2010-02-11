@@ -7,7 +7,7 @@ mkdir -p $2
 echo "return {" > $2/data.lua
 
 #convert the XML
-for dir in Actions InitialObject Objects Races Scenarios
+for dir in Actions InitialObject Objects Races Scenarios Conditions
 do
 echo "$dir"
 mkdir -p "$2$dir"
